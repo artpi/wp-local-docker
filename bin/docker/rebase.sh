@@ -4,5 +4,6 @@ if [ ! -f /var/scripts/config.sh ]; then
 fi
 source /var/scripts/config.sh
 
-lftp  -u $PROD_FTP_USER,$PROD_FTP_PASS  -e 'set ftp:ssl-allow no;mirror -en -x \cache/$ -P 4 ${PROD_FTP_DIR} /var/www/html/wp-content;exit' $PROD_FTP_ADDR
+cd /var/www/html/wp-content
+lftp -u ${PROD_FTP_USER},${PROD_FTP_PASS}  -e "set ftp:ssl-allow no;mirror -en -x \cache/$ -P 4 ${PROD_FTP_DIR} /var/www/html/wp-content;exit" ${PROD_FTP_ADDR}
 echo "Files updated. Please commit these new files."
