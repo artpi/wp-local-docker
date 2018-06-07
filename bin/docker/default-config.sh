@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PROD_FTP_USER=""
+PROD_FTP_PASS=""
+PROD_FTP_DIR=""
+PROD_FTP_ADDR=""

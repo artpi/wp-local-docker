@@ -42,3 +42,6 @@ notes.md
 /config/elasticsearch/plugins/*
 
 config/wpsnapshots/.wpsnapshots.json
+
+/bin/docker/config.sh
+
