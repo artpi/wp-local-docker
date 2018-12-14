@@ -2,11 +2,8 @@ version: '3'
 services:
   mysql:
     image: mysql:5
-#    volumes:
-#      - "./data/db:/var/lib/mysql"  # Uncomment to turn on DB persistence across rebuilds. It is introducing trouble on windows.
-    restart: always
-    ports:
-      - "3308:3306"
+    volumes:
+       - "./data/db:/var/lib/mysql"  # Uncomment to turn on DB persistence across rebuilds. It is introducing trouble on windows.
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: wordpress
@@ -14,7 +11,6 @@ services:
       MYSQL_PASSWORD: "password"
   mailcatcher:
      image: schickling/mailcatcher
-     restart: always
      ports:
        - "1025:1025"
        - "1080:1080"
@@ -34,7 +30,6 @@ services:
       - "./db-dump:/var/db-dump"
       - "./bin/docker:/var/scripts"
       - ~/.ssh:/root/.ssh
-    restart: always
   nginx:
     depends_on:
       - phpfpm
@@ -48,4 +43,3 @@ services:
       - "./config/nginx/default.conf:/etc/nginx/conf.d/default.conf"
       - "./config/certs:/etc/nginx/certs"
       - "./logs/nginx:/var/log/nginx"
-    restart: always

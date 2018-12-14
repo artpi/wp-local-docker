@@ -1,6 +1,7 @@
 #!/bin/bash
 cd /var/www/html
-#wp core download --skip-themes --skip-plugins
+
+wp core download --version=4.9.9 --skip-content
 rm wp-config.php
 wp core config --dbhost=mysql --dbname=wordpress --dbuser=root --dbpass=password
 wp core install --url=localhost --title="Test site" --admin_user=admin --admin_email=artur.piszek@gmail.com --admin_password=password
