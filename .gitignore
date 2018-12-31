@@ -44,4 +44,5 @@ notes.md
 config/wpsnapshots/.wpsnapshots.json
 
 /bin/docker/config.sh
+secrets.php
 
