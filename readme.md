@@ -29,6 +29,28 @@ All the files you should concern yourself about are in `./wp-content`. There is 
    - Set everything up: `/var/scripts/setup.sh`
 1. Once everything is set up, you can see the site under [http://localhost](http://localhost)
 
+### Multisite.
+If you have a multisite, the short tutorial is:
+1. `docker-compose up`
+1. `docker-compose exec --user www-data phpfpm /var/scripts/setup.sh`
+1. Now you have to edit wordpress/wp-config.php
+```
+// This is assuming you have your whole network under `artpi.pl`
+
+define( 'WP_ALLOW_MULTISITE', true );
+define( 'MULTISITE', true );
+define( 'SUBDOMAIN_INSTALL', true );
+$base = '/';
+define( 'PRODUCTION_DOMAIN_CURRENT_SITE', 'artpi.pl' );
+define( 'DOMAIN_CURRENT_SITE', 'dev.local' );
+define( 'PATH_CURRENT_SITE', '/' );
+define( 'SITE_ID_CURRENT_SITE', 1 );
+define( 'BLOG_ID_CURRENT_SITE', 1 );
+```
+1. Add `127.0.0.1   dev.local` and `127.0.0.1   subdomain.dev.local` for every subdomain in `/etc/hosts`
+1. Now run `docker-compose exec --user www-data phpfpm /var/scripts/import-db-from-prod-dump.sh` to set up everything.
+1. You are good.
+
 ## Running scripts on container
 
 There are some scripts in [bin/docker](./bin/docker) directory. To run them, you have to enter the virtual machine command line:
